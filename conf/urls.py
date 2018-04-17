@@ -21,7 +21,15 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls')),
 ]
 
+from django.conf import settings
+
 if settings.DEBUG:
     from django.conf.urls.static import static
     urlpatterns += static(r'/favicon.ico', document_root='static/images/favicon.ico')
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
 
